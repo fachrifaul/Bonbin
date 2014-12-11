@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -16,12 +19,16 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -168,7 +175,7 @@ public class SearchActivity extends Activity implements TextWatcher,
 	private void setData() {
 		// search.addTextChangedListener(this);
 		daftarHewan = dbHelper.getAllHewan();
-		//System.out.println(dbHelper.getHewan("Singa").toString());
+		// System.out.println(dbHelper.getHewan("Singa").toString());
 
 		adapter = new HewanAdapter(getApplicationContext(),
 				R.layout.item_list_image, daftarHewan);
@@ -218,7 +225,22 @@ public class SearchActivity extends Activity implements TextWatcher,
 			overridePendingTransition(R.anim.right_slide_in,
 					R.anim.right_slide_out);
 		}
-		
+		if (item.getItemId() == R.id.action_price) {
+			final Dialog dialog = new Dialog(context);
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			dialog.setContentView(R.layout.layout_dialog);
+			Button ok = (Button) dialog.findViewById(R.id.ok);
+			ok.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+				}
+			});
+			dialog.show();
+
+		}
 
 		return super.onOptionsItemSelected(item);
 
