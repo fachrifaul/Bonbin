@@ -1,7 +1,9 @@
 package com.facwork.bonbin;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -12,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -48,7 +51,6 @@ public class SplashActivity extends Activity {
 		mContext = this;
 
 		initLocationManager();
-
 		TextView textsplash = (TextView) findViewById(R.id.textSplash);
 
 		Typeface face = Typeface.createFromAsset(getAssets(),
@@ -56,7 +58,6 @@ public class SplashActivity extends Activity {
 		textsplash.setTypeface(face);
 
 		StartAnimations();// Menjalankan Method Start Animasi
-
 		Thread splashThread = new Thread() {
 			// Timer Splash
 			public void run() {
@@ -71,8 +72,9 @@ public class SplashActivity extends Activity {
 				} catch (InterruptedException e) {
 					// do nothing
 				} finally {
+
 					new AsyncGetDataFromWeb().execute();
-					
+
 					finish();
 					Intent newIntent = new Intent(SplashActivity.this,
 							SearchActivity.class);
@@ -123,18 +125,45 @@ public class SplashActivity extends Activity {
 		criteria.setAccuracy(Criteria.ACCURACY_FINE);
 		criteria.setPowerRequirement(Criteria.POWER_LOW);
 		bestProvider = locationManager.getBestProvider(criteria, true);
+		String provider = Settings.Secure.getString(getContentResolver(),
+				Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 		// location = locationManager.getLastKnownLocation(bestProvider);
+		if (!provider.contains("gps")) {
 
-		if (bestProvider.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
-			// locationManager.requestLocationUpdates(bestProvider, 0, 1000,
-			// locationListener);
-			locationManager.requestLocationUpdates(
-					LocationManager.GPS_PROVIDER, WAKTU_MINIMUM_UNTUK_UPDATE,
-					JARAK_MINIMAL_UNTUK_UPDATE, new MyLocationListener());
+			final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+			final String message = "GPS anda tidak aktif."
+					+ " Klik OK untuk mengaktifkan.";
+
+			builder.setMessage(message)
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface d, int id) {
+									startActivity(new Intent(action));
+									d.dismiss();
+								}
+							})
+					.setNegativeButton("Cancel",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface d, int id) {
+									d.cancel();
+								}
+							});
+			builder.create().show();
+
 		} else {
-			Location loc = locationManager
-					.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-			setUserLocation(loc);
+			if (bestProvider.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
+				// locationManager.requestLocationUpdates(bestProvider, 0, 1000,
+				// locationListener);
+				locationManager.requestLocationUpdates(
+						LocationManager.GPS_PROVIDER,
+						WAKTU_MINIMUM_UNTUK_UPDATE, JARAK_MINIMAL_UNTUK_UPDATE,
+						new MyLocationListener());
+			} else {
+				Location loc = locationManager
+						.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+				setUserLocation(loc);
+			}
 		}
 
 	}
@@ -192,9 +221,9 @@ public class SplashActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			Toast.makeText(mContext,
-					"Provider enabled oleh the user. GPS online",
-					Toast.LENGTH_LONG).show();
+//			Toast.makeText(mContext,
+//					"Provider enabled oleh the user. GPS online",
+//					Toast.LENGTH_LONG).show();
 		}
 
 		@Override

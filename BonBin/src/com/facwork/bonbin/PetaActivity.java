@@ -27,6 +27,8 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBarActivity;
@@ -67,9 +69,8 @@ public class PetaActivity extends ActionBarActivity implements
 	LocationManager locationManager;
 	boolean gps_enabled = false;
 	boolean network_enabled = false;
-	
-	public static final GeoPoint POS = new GeoPoint(-6.8675379,107.5943157);
-	
+
+	public static final GeoPoint POS = new GeoPoint(-6.8675379, 107.5943157);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +87,8 @@ public class PetaActivity extends ActionBarActivity implements
 
 		mapViewController = mapView.getController();
 		mapViewController.setZoom(18);
-//		 mapViewController.setCenter(POS);
-//		 mapViewController.animateTo(POS);
+		 mapViewController.setCenter(POS);
+		 mapViewController.animateTo(POS);
 
 		// Invoke LoaderCallbacks to retrieve and draw already saved
 		// locations in map
@@ -271,6 +272,8 @@ public class PetaActivity extends ActionBarActivity implements
 
 		googleMap.addMarker(markerOptions).showInfoWindow();
 
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 	}
 
 	// private class LocationInsertTask extends
@@ -425,20 +428,28 @@ public class PetaActivity extends ActionBarActivity implements
 		}
 	}
 
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.peta, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+	// public boolean onCreateOptionsMenu(Menu menu) {
+	// MenuInflater inflater = getMenuInflater();
+	// inflater.inflate(R.menu.peta, menu);
+	// return super.onCreateOptionsMenu(menu);
+	// }
 
 	public boolean onOptionsItemSelected(MenuItem item) {
-
-		if (item.getItemId() == R.id.item_search) {
+		switch (item.getItemId()) {
+		// Respond to the action bar's Up/Home button
+		case android.R.id.home:
 			finish();
-			startActivity(new Intent(this, SearchActivity.class));
 			overridePendingTransition(R.anim.right_slide_in,
 					R.anim.right_slide_out);
+			return true;
 		}
+
+		// if (item.getItemId() == R.id.item_search) {
+		// finish();
+		// startActivity(new Intent(this, SearchActivity.class));
+		// overridePendingTransition(R.anim.right_slide_in,
+		// R.anim.right_slide_out);
+		// }
 		return super.onOptionsItemSelected(item);
 
 	}

@@ -220,7 +220,6 @@ public class SearchActivity extends Activity implements TextWatcher,
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		if (item.getItemId() == R.id.item_maps) {
-			finish();
 			startActivity(new Intent(SearchActivity.this, PetaActivity.class));
 			overridePendingTransition(R.anim.right_slide_in,
 					R.anim.right_slide_out);
