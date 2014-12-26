@@ -117,7 +117,7 @@ public class LocationsDB extends SQLiteOpenHelper {
 	public Cursor getAllLocations() {
 		return mDB.query(DATABASE_TABLE, new String[] { FIELD_ROW_ID,
 				FIELD_LAT, FIELD_LNG, FIELD_TITLE, FIELD_IMAGE,
-				FIELD_DESCRIPTION }, null, null, null, null, null);
+				FIELD_DESCRIPTION }, null, null, null, null, FIELD_TITLE);
 	}
 
 	public SQLiteDatabase getDB() {

@@ -6,12 +6,6 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
-
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
@@ -29,7 +23,7 @@
             <RelativeLayout
                 android:id="@+id/viewimagepath"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="@dimen/dimen_200dp"
                 android:layout_weight="40"
                 android:orientation="vertical" >
 
@@ -41,6 +35,14 @@
                     android:layout_centerVertical="true"
                     android:contentDescription="@string/app_name"
                     android:scaleType="centerCrop" />
+
+                <ProgressBar
+                    android:id="@+id/loading"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/txt_title"
@@ -56,35 +58,6 @@
                     android:textColor="#FFF"
                     android:textSize="@dimen/text_24sp"
                     android:textStyle="bold" />
-
-                <!--
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:gravity="right"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:id="@+id/btn_maps"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginRight="20dp"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/app_name"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/mapsbutton" />
-
-                    <ImageView
-                        android:id="@+id/btn_ar"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/app_name"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/arbutton" />
-                </LinearLayout>
-                -->
             </RelativeLayout>
 
             <LinearLayout
@@ -96,8 +69,8 @@
                 <Button
                     android:id="@+id/go_peta"
                     android:layout_width="fill_parent"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:background="@drawable/buttonstyle"
                     android:text="Peta"

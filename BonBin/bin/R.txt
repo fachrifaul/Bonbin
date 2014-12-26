@@ -430,7 +430,7 @@ int id item_maps 0x7f0c007e
 int id item_search 0x7f0c007d
 int id listMode 0x7f0c001a
 int id list_item 0x7f0c003b
-int id loading 0x7f0c006e
+int id loading 0x7f0c0071
 int id lv_data 0x7f0c0059
 int id map 0x7f0c0055
 int id mapview 0x7f0c0053
@@ -444,7 +444,7 @@ int id never 0x7f0c0025
 int id none 0x7f0c0007
 int id normal 0x7f0c0008
 int id ok 0x7f0c007c
-int id picture 0x7f0c0071
+int id picture 0x7f0c0070
 int id production 0x7f0c000d
 int id progressBar1 0x7f0c005f
 int id progress_circular 0x7f0c0004
@@ -459,7 +459,7 @@ int id satellite 0x7f0c0009
 int id scan_button 0x7f0c0056
 int id scan_content 0x7f0c0058
 int id scan_format 0x7f0c0057
-int id scrollView1 0x7f0c006f
+int id scrollView1 0x7f0c006e
 int id search 0x7f0c005a
 int id search_badge 0x7f0c0044
 int id search_bar 0x7f0c0043
@@ -496,7 +496,7 @@ int id txt_lng 0x7f0c0076
 int id txt_title 0x7f0c0072
 int id up 0x7f0c0033
 int id useLogo 0x7f0c0021
-int id viewimagepath 0x7f0c0070
+int id viewimagepath 0x7f0c006f
 int id viewtext 0x7f0c0074
 int id viewtext2 0x7f0c0077
 int id viewtext3 0x7f0c0079

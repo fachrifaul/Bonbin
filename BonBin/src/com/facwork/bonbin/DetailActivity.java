@@ -14,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +57,7 @@ public class DetailActivity extends Activity {
 		ImageLoader.getInstance().init(config);
 
 		final ProgressBar spinner = (ProgressBar) findViewById(R.id.loading);
-		final ScrollView viewimagepath = (ScrollView) findViewById(R.id.scrollView1);
+		//final ScrollView viewimagepath = (ScrollView) findViewById(R.id.scrollView1);
 
 		options = new DisplayImageOptions.Builder()
 				.showImageForEmptyUri(R.drawable.ic_empty)
@@ -118,7 +117,7 @@ public class DetailActivity extends Activity {
 					@Override
 					public void onLoadingStarted(String imageUri, View view) {
 						spinner.setVisibility(View.VISIBLE);
-						viewimagepath.setVisibility(View.GONE);
+						imageurlV.setVisibility(View.GONE);
 
 					}
 
@@ -153,7 +152,7 @@ public class DetailActivity extends Activity {
 					public void onLoadingComplete(String imageUri, View view,
 							Bitmap loadedImage) {
 						spinner.setVisibility(View.GONE);
-						viewimagepath.setVisibility(View.VISIBLE);
+						imageurlV.setVisibility(View.VISIBLE);
 
 					}
 				});

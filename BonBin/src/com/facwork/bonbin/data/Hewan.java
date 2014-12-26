@@ -66,7 +66,7 @@ public class Hewan {
 
 	@Override
 	public String toString() {
-		return this.deskripsi;
+		return this.title;
 	}
 
 	public double getJarak() {

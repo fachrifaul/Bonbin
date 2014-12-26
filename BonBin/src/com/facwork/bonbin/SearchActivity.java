@@ -4,22 +4,13 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,13 +27,9 @@ import com.facwork.bonbin.adapter.HewanAdapter;
 import com.facwork.bonbin.data.Hewan;
 import com.facwork.bonbin.database.Constants.Extra;
 import com.facwork.bonbin.database.DatabaseHelper;
-import com.facwork.bonbin.database.LocationsContentProvider;
-import com.facwork.bonbin.database.LocationsDB;
-import com.facwork.bonbin.utils.Utils;
-import com.google.android.gms.internal.db;
 
 public class SearchActivity extends Activity implements TextWatcher,
-		OnItemClickListener, LoaderCallbacks<Cursor> {
+		OnItemClickListener {
 	// private EditText search;
 	private ListView lv;
 	private DatabaseHelper dbHelper;
@@ -107,71 +94,6 @@ public class SearchActivity extends Activity implements TextWatcher,
 		overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
 	}
 
-	@Override
-	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		// Uri to the content provider LocationsContentProvider
-		Uri uri = LocationsContentProvider.CONTENT_URI;
-
-		// Fetches all the rows from locations table
-		return new CursorLoader(this, uri, null, null, null, null);
-	}
-
-	@Override
-	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
-		arg1.moveToFirst();
-		// Untuk mengambil lokasi user saat ini
-		SharedPreferences prefLocation = context
-				.getSharedPreferences("mkul", 0);
-		double latUser = Double.parseDouble(prefLocation.getString("userLat",
-				"0"));
-		double lonUser = Double.parseDouble(prefLocation.getString("userLon",
-				"0"));
-		// list gedung dari database
-		for (int i = 0; i < arg1.getCount(); i++) {
-
-			double latP = Double.parseDouble(arg1.getString(arg1
-					.getColumnIndex(LocationsDB.FIELD_LAT)));
-			double lonP = Double.parseDouble(arg1.getString(arg1
-					.getColumnIndex(LocationsDB.FIELD_LNG)));
-
-			double jarak = Utils.getDistanceBetweenTwoLocation(latUser,
-					lonUser, latP, lonP);
-			jarak = Utils.RoundDecimal(jarak, 2);
-
-			// dari database
-			daftarHewan
-					.add(new Hewan(
-							arg1.getString(arg1
-									.getColumnIndex(LocationsDB.FIELD_ROW_ID)),
-							arg1.getString(arg1
-									.getColumnIndex(LocationsDB.FIELD_LNG)),
-							arg1.getString(arg1
-									.getColumnIndex(LocationsDB.FIELD_LAT)),
-							arg1.getString(arg1
-									.getColumnIndex(LocationsDB.FIELD_TITLE)),
-							arg1.getString(arg1
-									.getColumnIndex(LocationsDB.FIELD_IMAGE)),
-							arg1.getString(arg1
-									.getColumnIndex(LocationsDB.FIELD_DESCRIPTION)),
-							jarak));
-			arg1.moveToNext();
-		}
-
-		// search.addTextChangedListener(this);
-
-		adapter = new HewanAdapter(getApplicationContext(),
-				R.layout.item_list_image, daftarHewan);
-		lv.setAdapter(adapter);
-		lv.setOnItemClickListener(this);
-
-	}
-
-	@Override
-	public void onLoaderReset(Loader<Cursor> arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
 	private void setData() {
 		// search.addTextChangedListener(this);
 		daftarHewan = dbHelper.getAllHewan();
@@ -180,7 +102,6 @@ public class SearchActivity extends Activity implements TextWatcher,
 		adapter = new HewanAdapter(getApplicationContext(),
 				R.layout.item_list_image, daftarHewan);
 		lv.setAdapter(adapter);
-
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -230,7 +151,7 @@ public class SearchActivity extends Activity implements TextWatcher,
 			dialog.setContentView(R.layout.layout_dialog);
 			Button ok = (Button) dialog.findViewById(R.id.ok);
 			ok.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub

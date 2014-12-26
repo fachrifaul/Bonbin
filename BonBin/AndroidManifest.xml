@@ -66,15 +66,17 @@
             android:theme="@style/MyThemeMaps" >
         </activity>
         <!-- laptop -->
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBb0gH_WgHecwWHv8pF4QvFdDQes49j28Q" />
+
+        <!-- bdv -->
         <!--
              <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBb0gH_WgHecwWHv8pF4QvFdDQes49j28Q" />
+            android:value="AIzaSyAWQ54JDgvtF2hPaiepMVD6vLNDuwkIF9E" />
         -->
-        <!-- bdv -->
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAWQ54JDgvtF2hPaiepMVD6vLNDuwkIF9E" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

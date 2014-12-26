@@ -62,13 +62,11 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 	}
 
 	public ArrayList<Hewan> getAllHewan() {
-		ArrayList<Hewan> daftarGedung = new ArrayList<Hewan>();
+		ArrayList<Hewan> daftarHewan = new ArrayList<Hewan>();
 
-		Cursor cursor = db.query(TB_DATA, new String[] {
-				LocationsDB.FIELD_ROW_ID, LocationsDB.FIELD_LNG,
-				LocationsDB.FIELD_LAT, LocationsDB.FIELD_TITLE,
-				LocationsDB.FIELD_IMAGE, LocationsDB.FIELD_DESCRIPTION }, null,
-				null, null, null, LocationsDB.FIELD_DESCRIPTION);
+		Cursor cursor = db.query(TB_DATA, new String[] { FIELD_ROW_ID,
+				FIELD_LNG, FIELD_LAT, FIELD_TITLE, FIELD_IMAGE,
+				FIELD_DESCRIPTION }, null, null, null, null, FIELD_TITLE);
 
 		// Untuk mengambil lokasi user saat ini
 		prefLocation = context.getSharedPreferences("mkul", 0);
@@ -83,75 +81,68 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 			do {
 
 				double latP = Double.parseDouble(cursor.getString(cursor
-						.getColumnIndex(LocationsDB.FIELD_LAT)));
+						.getColumnIndex(FIELD_LAT)));
 				double lonP = Double.parseDouble(cursor.getString(cursor
-						.getColumnIndex(LocationsDB.FIELD_LNG)));
+						.getColumnIndex(FIELD_LNG)));
 
 				double jarak = Utils.getDistanceBetweenTwoLocation(latUser,
 						lonUser, latP, lonP);
 				jarak = Utils.RoundDecimal(jarak, 2);
 
-				Hewan kamus = new Hewan(
-						cursor.getString(cursor
-								.getColumnIndex(LocationsDB.FIELD_ROW_ID)),
-						cursor.getString(cursor
-								.getColumnIndex(LocationsDB.FIELD_LNG)),
-						cursor.getString(cursor
-								.getColumnIndex(LocationsDB.FIELD_LAT)),
-						cursor.getString(cursor
-								.getColumnIndex(LocationsDB.FIELD_TITLE)),
-						cursor.getString(cursor
-								.getColumnIndex(LocationsDB.FIELD_IMAGE)),
-						cursor.getString(cursor
-								.getColumnIndex(LocationsDB.FIELD_DESCRIPTION)),
-						jarak);
+				Hewan kamus = new Hewan(cursor.getString(cursor
+						.getColumnIndex(FIELD_ROW_ID)), cursor.getString(cursor
+						.getColumnIndex(FIELD_LNG)), cursor.getString(cursor
+						.getColumnIndex(FIELD_LAT)), cursor.getString(cursor
+						.getColumnIndex(FIELD_TITLE)), cursor.getString(cursor
+						.getColumnIndex(FIELD_IMAGE)), cursor.getString(cursor
+						.getColumnIndex(FIELD_DESCRIPTION)), jarak);
 
-				daftarGedung.add(kamus);
+				daftarHewan.add(kamus);
 
 			} while (cursor.moveToNext());
 		}
-		return daftarGedung;
+		return daftarHewan;
 
 	}
-
-	public Hewan getHewan(String scan) {
-		// String scan = "3Singa";
-		// Hewan data = null;
-		Cursor cursor = db.query(TB_DATA, new String[] {
-				LocationsDB.FIELD_ROW_ID, LocationsDB.FIELD_LNG,
-				LocationsDB.FIELD_LAT, LocationsDB.FIELD_TITLE,
-				LocationsDB.FIELD_IMAGE, LocationsDB.FIELD_DESCRIPTION },
-				LocationsDB.FIELD_TITLE + "=?", new String[] { scan }, null,
-				null, null, null);
-
-		// Untuk mengambil lokasi user saat ini
-		prefLocation = context.getSharedPreferences("mkul", 0);
-		double latUser = Double.parseDouble(prefLocation.getString("userLat",
-				"0"));
-		double lonUser = Double.parseDouble(prefLocation.getString("userLon",
-				"0"));
-
-		if (cursor != null)
-			cursor.moveToFirst();
-
-		double latP = Double.parseDouble(cursor.getString(cursor
-				.getColumnIndex(LocationsDB.FIELD_LAT)));
-		double lonP = Double.parseDouble(cursor.getString(cursor
-				.getColumnIndex(LocationsDB.FIELD_LNG)));
-
-		double jarak = Utils.getDistanceBetweenTwoLocation(latUser, lonUser,
-				latP, lonP);
-		jarak = Utils.RoundDecimal(jarak, 2);
-		Hewan data = new Hewan(
-				cursor.getString(cursor.getColumnIndex(LocationsDB.FIELD_ROW_ID)),
-				cursor.getString(cursor.getColumnIndex(LocationsDB.FIELD_LNG)),
-				cursor.getString(cursor.getColumnIndex(LocationsDB.FIELD_LAT)),
-				cursor.getString(cursor.getColumnIndex(LocationsDB.FIELD_TITLE)),
-				cursor.getString(cursor.getColumnIndex(LocationsDB.FIELD_IMAGE)),
-				cursor.getString(cursor.getColumnIndex(LocationsDB.FIELD_DESCRIPTION)), jarak);
-		// }
-
-		return data;
-	}
+	//
+	// public Hewan getHewan(String scan) {
+	// // String scan = "3Singa";
+	// // Hewan data = null;
+	// Cursor cursor = db.query(TB_DATA, new String[] {
+	// FIELD_ROW_ID, FIELD_LNG,
+	// FIELD_LAT, FIELD_TITLE,
+	// FIELD_IMAGE, FIELD_DESCRIPTION },
+	// FIELD_TITLE + "=?", new String[] { scan }, null,
+	// null, null, null);
+	//
+	// // Untuk mengambil lokasi user saat ini
+	// prefLocation = context.getSharedPreferences("mkul", 0);
+	// double latUser = Double.parseDouble(prefLocation.getString("userLat",
+	// "0"));
+	// double lonUser = Double.parseDouble(prefLocation.getString("userLon",
+	// "0"));
+	//
+	// if (cursor != null)
+	// cursor.moveToFirst();
+	//
+	// double latP = Double.parseDouble(cursor.getString(cursor
+	// .getColumnIndex( FIELD_LAT)));
+	// double lonP = Double.parseDouble(cursor.getString(cursor
+	// .getColumnIndex( FIELD_LNG)));
+	//
+	// double jarak = Utils.getDistanceBetweenTwoLocation(latUser, lonUser,
+	// latP, lonP);
+	// jarak = Utils.RoundDecimal(jarak, 2);
+	// Hewan data = new Hewan(
+	// cursor.getString(cursor.getColumnIndex( FIELD_ROW_ID)),
+	// cursor.getString(cursor.getColumnIndex( FIELD_LNG)),
+	// cursor.getString(cursor.getColumnIndex( FIELD_LAT)),
+	// cursor.getString(cursor.getColumnIndex( FIELD_TITLE)),
+	// cursor.getString(cursor.getColumnIndex( FIELD_IMAGE)),
+	// cursor.getString(cursor.getColumnIndex( FIELD_DESCRIPTION)), jarak);
+	// // }
+	//
+	// return data;
+	// }
 
 }
