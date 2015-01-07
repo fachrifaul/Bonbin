@@ -22,9 +22,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.facwork.bonbin.adapter.HewanAdapter;
 import com.facwork.bonbin.data.Hewan;
+import com.facwork.bonbin.data.Informasi;
 import com.facwork.bonbin.database.Constants.Extra;
 import com.facwork.bonbin.database.DatabaseHelper;
 
@@ -37,6 +39,7 @@ public class SearchActivity extends Activity implements TextWatcher,
 	Context context;
 
 	ArrayList<Hewan> daftarHewan = new ArrayList<Hewan>();
+	//ArrayList<Informasi> info = new ArrayList<Informasi>();
 
 	@SuppressLint("NewApi")
 	@Override
@@ -96,6 +99,7 @@ public class SearchActivity extends Activity implements TextWatcher,
 
 	private void setData() {
 		// search.addTextChangedListener(this);
+		//info = (ArrayList<Informasi>) dbHelper.getInformasi();
 		daftarHewan = dbHelper.getAllHewan();
 		// System.out.println(dbHelper.getHewan("Singa").toString());
 
@@ -146,9 +150,16 @@ public class SearchActivity extends Activity implements TextWatcher,
 					R.anim.right_slide_out);
 		}
 		if (item.getItemId() == R.id.action_price) {
+			
+		
+			
 			final Dialog dialog = new Dialog(context);
 			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialog.setContentView(R.layout.layout_dialog);
+			
+			TextView text = (TextView) dialog.findViewById(R.id.informasi);
+			//text.setText(info.get(0).getinfo());
+			
 			Button ok = (Button) dialog.findViewById(R.id.ok);
 			ok.setOnClickListener(new OnClickListener() {
 

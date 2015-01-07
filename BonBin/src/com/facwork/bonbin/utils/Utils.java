@@ -16,7 +16,7 @@ import android.util.Log;
 
 public class Utils {
 	
-	public static String URL = "http://pandji-bimantoro.com/admin/hal-admin/";
+	public static String URL = "http://pandjibimantoro.com/admin/hal-admin/";
 	//public static String URL = "http://192.168.198.1/mtower/"; 
 	
 	public static InputStream getCoverFromCache(Context ctx, String fullUrl)

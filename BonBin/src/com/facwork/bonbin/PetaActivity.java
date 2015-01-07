@@ -82,7 +82,7 @@ public class PetaActivity extends ActionBarActivity implements
 		mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
 
 		mapViewController = mapView.getController();
-		mapViewController.setZoom(18);
+		mapViewController.setZoom(17);
 		 mapViewController.setCenter(POS);
 		 mapViewController.animateTo(POS);
 

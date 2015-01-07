@@ -1,6 +1,7 @@
 package com.facwork.bonbin.database;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.facwork.bonbin.data.Hewan;
+import com.facwork.bonbin.data.Informasi;
 import com.facwork.bonbin.utils.Utils;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -16,23 +18,16 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 	private static final int DB_VER = 1;
 
 	private static final String TB_DATA = "bonbin";
-	/** Field 1 of the table locations, which is the primary key */
+	private static final String TB_DATA_INFO = "informasi";
 	public static final String FIELD_ROW_ID = "id";
-
-	/** Field 2 of the table locations, stores the latitude */
 	public static final String FIELD_LAT = "lat";
-
-	/** Field 3 of the table locations, stores the longitude */
 	public static final String FIELD_LNG = "lng";
-
-	/** Field 4 of the table locations, stores the name location */
 	public static final String FIELD_TITLE = "title";
-
-	/** Field 8 of the table locations, stores the latitude */
 	public static final String FIELD_IMAGE = "image";
-
-	/** Field9 of the table locations, stores the latitude */
 	public static final String FIELD_DESCRIPTION = "description";
+
+	public static final String FIELD_ID_INFO = "id";
+	public static final String FIELD_INFO = "info";
 
 	private static DatabaseHelper dbInstance;
 	private static SQLiteDatabase db;
@@ -102,6 +97,26 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 			} while (cursor.moveToNext());
 		}
 		return daftarHewan;
+
+	}
+
+	public List<Informasi> getInformasi() {
+		List<Informasi> listinfo = new ArrayList<Informasi>();
+
+		Cursor cursor = db.query(TB_DATA_INFO, new String[] { FIELD_ID_INFO,
+				FIELD_INFO }, null, null, null, null, FIELD_INFO);
+		if (cursor.getCount() >= 1) {
+			cursor.moveToFirst();
+
+			do {
+				Informasi info = new Informasi(cursor.getString(cursor
+						.getColumnIndex(FIELD_ROW_ID)), cursor.getString(cursor
+						.getColumnIndex(FIELD_INFO)));
+				listinfo.add(info);
+
+			} while (cursor.moveToNext());
+		}
+		return listinfo;
 
 	}
 	//

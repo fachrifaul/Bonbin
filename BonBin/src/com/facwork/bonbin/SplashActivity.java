@@ -231,6 +231,7 @@ public class SplashActivity extends Activity {
 			// TODO Auto-generated method stub
 			GetAllHewan gar = new GetAllHewan(mContext);
 			gar.getAllPoi();
+			gar.getInformasi();
 
 			return null;
 		}

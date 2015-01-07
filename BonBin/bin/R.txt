@@ -374,7 +374,7 @@ int drawable pin_blue 0x7f02008e
 int drawable powered_by_google_dark 0x7f02008f
 int drawable powered_by_google_light 0x7f020090
 int id SplashLayout 0x7f0c005c
-int id a_More 0x7f0c007f
+int id a_More 0x7f0c0082
 int id action_bar 0x7f0c002e
 int id action_bar_activity_content 0x7f0c0001
 int id action_bar_container 0x7f0c002d
@@ -386,7 +386,7 @@ int id action_context_bar 0x7f0c002f
 int id action_menu_divider 0x7f0c0002
 int id action_menu_presenter 0x7f0c0003
 int id action_mode_close_button 0x7f0c0036
-int id action_price 0x7f0c0080
+int id action_price 0x7f0c0083
 int id activity_chooser_view_content 0x7f0c0037
 int id always 0x7f0c0022
 int id back 0x7f0c0061
@@ -426,8 +426,11 @@ int id ifRoom 0x7f0c0024
 int id image 0x7f0c0039
 int id image_list2 0x7f0c0078
 int id image_list3 0x7f0c007a
-int id item_maps 0x7f0c007e
-int id item_search 0x7f0c007d
+int id info 0x7f0c007b
+int id infobiasa 0x7f0c007d
+int id informasi 0x7f0c007c
+int id item_maps 0x7f0c0081
+int id item_search 0x7f0c0080
 int id listMode 0x7f0c001a
 int id list_item 0x7f0c003b
 int id loading 0x7f0c0071
@@ -443,7 +446,7 @@ int id monochrome 0x7f0c0019
 int id never 0x7f0c0025
 int id none 0x7f0c0007
 int id normal 0x7f0c0008
-int id ok 0x7f0c007c
+int id ok 0x7f0c007f
 int id picture 0x7f0c0070
 int id production 0x7f0c000d
 int id progressBar1 0x7f0c005f
@@ -483,7 +486,7 @@ int id submit_area 0x7f0c004b
 int id tabMode 0x7f0c001b
 int id terrain 0x7f0c000a
 int id textSplash 0x7f0c005e
-int id textView1 0x7f0c007b
+int id textView1 0x7f0c007e
 int id text_bonbin 0x7f0c0069
 int id text_lat 0x7f0c006b
 int id text_long 0x7f0c006c
