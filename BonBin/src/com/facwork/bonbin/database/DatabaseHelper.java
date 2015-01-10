@@ -100,8 +100,8 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
 	}
 
-	public List<Informasi> getInformasi() {
-		List<Informasi> listinfo = new ArrayList<Informasi>();
+	public ArrayList<Informasi> getInformasi() {
+		ArrayList<Informasi> listinfo = new ArrayList<Informasi>();
 
 		Cursor cursor = db.query(TB_DATA_INFO, new String[] { FIELD_ID_INFO,
 				FIELD_INFO }, null, null, null, null, FIELD_INFO);

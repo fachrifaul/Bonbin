@@ -79,7 +79,7 @@ public class PetaActivity extends ActionBarActivity implements
 		mapView.setBuiltInZoomControls(true);
 		mapView.setMultiTouchControls(true);
 		mapView.setUseDataConnection(true);
-		mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
+		mapView.setTileSource(TileSourceFactory.MAPNIK);
 
 		mapViewController = mapView.getController();
 		mapViewController.setZoom(17);
@@ -513,7 +513,7 @@ public class PetaActivity extends ActionBarActivity implements
 			// mapViewController.setCenter(UINSGD);
 			// mapViewController.setCenter(locGeoPoint);
 			// mapViewController.animateTo(locGeoPoint);
-			mapViewController.setZoom(18);
+			mapViewController.setZoom(20);
 			mapView.invalidate();
 
 		}
