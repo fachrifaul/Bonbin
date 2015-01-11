@@ -62,6 +62,9 @@ public class SplashActivity extends Activity {
 			// Timer Splash
 			public void run() {
 				try {
+
+					new AsyncGetDataFromWeb().execute();
+
 					int waited = 0;
 					while (_active && (waited < _splashTime)) {
 						sleep(100);
@@ -72,8 +75,6 @@ public class SplashActivity extends Activity {
 				} catch (InterruptedException e) {
 					// do nothing
 				} finally {
-
-					new AsyncGetDataFromWeb().execute();
 
 					finish();
 					Intent newIntent = new Intent(SplashActivity.this,
@@ -221,9 +222,9 @@ public class SplashActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-//			Toast.makeText(mContext,
-//					"Provider enabled oleh the user. GPS online",
-//					Toast.LENGTH_LONG).show();
+			// Toast.makeText(mContext,
+			// "Provider enabled oleh the user. GPS online",
+			// Toast.LENGTH_LONG).show();
 		}
 
 		@Override
